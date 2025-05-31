@@ -3,7 +3,7 @@ import cv2 as cv
 from matplotlib import pyplot as plt
 
 img = cv.imread('CV.png', cv.IMREAD_GRAYSCALE)
-assert img is not None, "File Could Not Be Read, Check With Os.Path.Exists()"
+assert img is not None, "File Could Not Be Read - Check With os.path.exists()"
 
 laplacian = cv.Laplacian(img, cv.CV_64F)
 sobelx = cv.Sobel(img, cv.CV_64F, 1, 0, ksize=5)
