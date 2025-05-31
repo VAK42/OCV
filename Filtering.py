@@ -3,7 +3,7 @@ import cv2 as cv
 from matplotlib import pyplot as plt
 
 img = cv.imread('CV.png')
-assert img is not None, "File Could Not Be Read, Check With Os.Path.Exists()"
+assert img is not None, "File Could Not Be Read - Check With os.path.exists()"
 
 kernel = np.ones((5,5), np.float32) / 25
 dst = cv.filter2D(img, -1, kernel)
