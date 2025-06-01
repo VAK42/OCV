@@ -15,8 +15,8 @@ print(green)
 print(red)
 img[100,100] = [255,255,255]  # Gán Pixel Tại (100,100) Thành Trắng
 print(img[100,100])
-print(img.shape)  # (Chiều Cao, Chiều Rộng, Kênh Màu)
-print(img.size)  # Chiều Cao × Chiều Rộng × Kênh Màu
+print(img.shape)  # (Height, Width, Channel)
+print(img.size)  # Height × Width × Channel
 print(img.dtype)
 ball = img[280:340, 330:390]
 # 280:340 → Dòng: Bắt Đầu Từ 280 - Đến 339 → Tổng Là 60 Dòng
