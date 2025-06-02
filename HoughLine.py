@@ -14,7 +14,7 @@ edges = cv.Canny(gray, 50, 150, apertureSize=3)
 lines = cv.HoughLines(edges, 1, np.pi / 180, 200)
 # 1: Độ Phân Giải Khoảng Cách (Pixel)
 # np.pi / 180: Độ Phân Giải Góc (π/180 Radian)
-# 200: Ngưỡng — Chỉ Lấy Dòng Có Tối Thiểu 200 Điểm
+# 200: Ngưỡng Số Bỏ Phiếu Tối Thiểu Để Xác Nhận Dòng
 
 for line in lines:
     rho, theta = line[0]
