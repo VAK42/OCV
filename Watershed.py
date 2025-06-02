@@ -7,25 +7,44 @@ assert img is not None, "File Could Not Be Read - Check With os.path.exists()"
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
-ret, thresh = cv.threshold(gray, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)
+Ret, Thresh = cv.threshold(Gray, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)
+# Ngưỡng Hóa Otsu Kèm Phép Đảo Nhị Phân
 
-kernel = np.ones((3, 3), np.uint8)
-opening = cv.morphologyEx(thresh, cv.MORPH_OPEN, kernel, iterations=2)
+Kernel = np.ones((3, 3), np.uint8)
+# Tạo Kernel Ma Trận 3x3 Toàn Số 1 Dạng Uint8
 
-sure_bg = cv.dilate(opening, kernel, iterations=3)
+Opening = cv.morphologyEx(Thresh, cv.MORPH_OPEN, Kernel, iterations=2)
+# Phép Mở (Làm Mòn → Giãn Nở) Để Loại Bỏ Nhiễu Nhỏ - Lặp 2 Lần
 
-dist_transform = cv.distanceTransform(opening, cv.DIST_L2, 5)
-ret, sure_fg = cv.threshold(dist_transform, 0.7 * dist_transform.max(), 255, 0)
+Sure_Bg = cv.dilate(Opening, Kernel, iterations=3)
+# Giãn Nở Để Tính Vùng Nền Chắc Chắn (Sure Background)
 
-sure_fg = np.uint8(sure_fg)
-unknown = cv.subtract(sure_bg, sure_fg)
+Dist_Transform = cv.distanceTransform(Opening, cv.DIST_L2, 5)
+# Tính Toạ Độ Khoảng Cách Từ Mỗi Điểm Đến Vùng Nền (Distance Transform)
 
-ret, markers = cv.connectedComponents(sure_fg)
-markers = markers + 1
-markers[unknown == 255] = 0
+Ret, Sure_Fg = cv.threshold(Dist_Transform, 0.7 * Dist_Transform.max(), 255, 0)
+# Ngưỡng Hóa Khoảng Cách Để Lấy Vùng Tiêu Chuẩn Chắc Chắn (Sure Foreground)
 
-markers = cv.watershed(img, markers)
-img[markers == -1] = [255, 0, 0]
+Sure_Fg = np.uint8(Sure_Fg)
+# Chuyển Đổi Dạng Ảnh Về Uint8 Để Xử Lý Tiếp
+
+Unknown = cv.subtract(Sure_Bg, Sure_Fg)
+# Tính Vùng Chưa Biết (Unknown) Bằng Phép Trừ Vùng Nền Với Vùng Tiêu Chuẩn
+
+Ret, Markers = cv.connectedComponents(Sure_Fg)
+# Đánh Dấu Các Vùng Kết Nối Trong Vùng Tiêu Chuẩn Chắc Chắn
+
+Markers = Markers + 1
+# Tăng Giá Trị Các Marker Lên 1 Để Phân Biệt Với Nền
+
+Markers[Unknown == 255] = 0
+# Gán Vùng Chưa Biết Là 0 Để Phân Biệt Trong Quá Trình Watershed
+
+Markers = cv.watershed(Img, Markers)
+# Áp Dụng Thuật Toán Watershed Để Phân Vùng
+
+Img[Markers == -1] = [255, 0, 0]
+# Tô Màu Biên Vùng Phân Vùng Bằng Màu Đỏ (BGR)
 
 cv.imshow("Segmented", img)
 cv.waitKey(0)
