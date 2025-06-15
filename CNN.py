@@ -77,6 +77,9 @@ plt.legend()
 
 plt.show()
 
+# Weight Dùng Để Xác Định Mức Độ Quan Trọng Của Pixel Đầu Vào Tại Mỗi Vị Trí
+# Bias Là Một Số Cộng Vào Kết Quả Sau Khi Tính Tích Chập Để Tăng Tính Linh Hoạt
+
 # https://poloclub.github.io/cnn-explainer
 # https://www.tensorflow.org/tutorials/images/cnn
 # https://colab.research.google.com/drive/1HDyOt73q8nKc1BO1Ol9JmJGo0GDZ-BBY
