@@ -58,7 +58,7 @@ history = model.fit(x_train, y_train, epochs=10, validation_data=(x_test, y_test
 test_loss, test_acc = model.evaluate(x_test, y_test)
 print(f"\nTest Accuracy: {test_acc:.4f}")
 
-# 9. Vẽ Biểu Đồ Accuracy Và Loss
+# 9. Vẽ Biểu Đồ Accuracy & Loss
 plt.figure(figsize=(12, 5))
 
 # Accuracy
@@ -79,6 +79,14 @@ plt.show()
 
 # Weight Dùng Để Xác Định Mức Độ Quan Trọng Của Pixel Đầu Vào Tại Mỗi Vị Trí
 # Bias Là Một Số Cộng Vào Kết Quả Sau Khi Tính Tích Chập Để Tăng Tính Linh Hoạt
+
+# H​ = (Input Height − Kernel Height) / 1 + 1
+# W = (Input Width − Kernel Width) / 1 + 1
+# (Kernel Height × Kernel Width × Input Channels + Bias) × Filters
+# Flatten: a x b x c
+# Dense: (Input + Bias) x Dense Neurons
+# w1​ * x1 ​+ w2 ​* x2 ​+ wmax​ * xmax ​+ b
+# Softmax: e**xn / Sum(e**x1 -> e**xmax)
 
 # https://poloclub.github.io/cnn-explainer
 # https://www.tensorflow.org/tutorials/images/cnn
