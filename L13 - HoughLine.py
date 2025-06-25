@@ -6,8 +6,14 @@ img = cv.imread(cv.samples.findFile('CV.png'))
 assert img is not None, "File Could Not Be Read - Check With os.path.exists()"
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-edges = cv.Canny(gray, 50, 150, apertureSize=3)
+edges = cv.Canny(gray, 50, 150, apertureSize=3)  # 3x3
 lines = cv.HoughLines(edges, 1, np.pi / 180, 200)
+# ρ = x * cosθ + y * sinθ
+# VD: x = 1 : y = 1
+# Có 4 θ: 0 - 45 - 90 -135
+# Áp Dụng Công Thức -> 4 ρ: 1 - 1 - 1 - 0
+# Cặp (p - theta) Có Số Lượng Lớn Hơn Điểm Vote (200) Sẽ Dc Giữ
+# Giá Trị Dc Giữ: x - y - ρ - θ
 
 for line in lines:
     rho, theta = line[0]
