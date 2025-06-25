@@ -7,6 +7,9 @@ assert img is not None, "File Could Not Be Read - Check With os.path.exists()"
 
 # Thresholding: Separate Objects From The Background In A Grayscale Image
 # Pixel's Intensity > Certain Value ? Foreground : Background
+# Simple Thresholding	- Uniform Lighting	 - Apply 1 Global Threshold Value
+# Adaptive Thresholding	- Uneven Lighting	 - Threshold Value Is Computed For Small Regions
+# Otsu’s Thresholding	- Bimodal Histograms - Automatically Find Best Threshold By Minimizing Intra-class Variance
 
 medianBlur = cv.medianBlur(img, 5)
 # Reduce Salt-And-Pepper Noise
